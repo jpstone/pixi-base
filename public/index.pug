@@ -1,0 +1,25 @@
+doctype html
+//if lt IE 7 
+  html.no-js.ie6(lang='en')  
+//if IE 7 
+  html.no-js.ie7(lang='en')  
+//if IE 8 
+  html.no-js.ie8(lang='en')  
+//if IE 9 
+  html.no-js.ie9(lang='en')  
+// [if (gt IE 9)|!(IE)] <!
+html(lang='en')
+  // <![endif]
+  //if IE
+    style.
+  head
+    meta(charset='utf-8')
+    meta(name='author', content='Justin Stone')
+    meta(name='keywords', content='')
+    meta(name='viewport', content='width=device-width,initial-scale=1')
+    link(href='dist/index.css',
+      rel='stylesheet')
+    title #{title}
+  body
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.0.0/pixi.min.js"></script>
+    <script src="dist/index.js"></script>
