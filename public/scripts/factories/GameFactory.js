@@ -3,6 +3,7 @@ const StageFactory = require('./StageFactory');
 
 module.exports = (width, height) => {
   return Object.assign(
-    StageFactory(RendererFactory(width, height))
+    StageFactory(RendererFactory(width, height)),
+    { sprite: {} }
   );
 };
