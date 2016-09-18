@@ -34,17 +34,18 @@ const path = {
     src: 'public/**/*.scss',
     main: 'public/styles/index.scss'
   },
-  img: 'public/img',
+  img: ['public/**/*.png', 'public/**/*.svg', 'public/**/*.jpg'],
   dist: 'dist'
 };
 
 gulp.task('serve', cb => { 
   runSequence(
     'clean',
+    'images',
     'styles',
     'bundle',
     'pug',
-    ['start'],
+    'start',
     'watch',
     cb
   );
@@ -102,6 +103,11 @@ gulp.task('styles', () => {
     .pipe(gulp.dest(path.css.dest));
 });
 
+gulp.task('images', () => {
+  return gulp.src(path.img)
+    .pipe(gulp.dest(path.dist));
+});
+
 gulp.task('pug', () => {
   return gulp.src(path.pug.src)
     .pipe(pug({
@@ -115,7 +121,7 @@ gulp.task('start', cb => {
     server: true,
     index: 'dist/index.html',
     notify: false,
-    files: [path.scss.src, path.img]
+    files: path.scss.src
   });
   cb();
 });
@@ -123,6 +129,8 @@ gulp.task('start', cb => {
 gulp.task('watch', () => {
 
   gulp.watch(path.scss.src, ['styles']);
+
+  gulp.watch(path.img, () => runSequence('clean', 'images', 'styles', 'bundle', 'pug'));
 
   gulp.watch(path.js.src, () => {
     runSequence('bundle', 'reload');
